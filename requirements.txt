@@ -1,0 +1,7 @@
+tensorflow
+schedule
+plyer
+twilio
+pandas
+numpy
+matplotlib

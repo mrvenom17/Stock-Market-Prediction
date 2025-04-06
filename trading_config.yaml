@@ -1,0 +1,97 @@
+symbols:
+  - symbol: "AAPL"
+    timeframe: "1m"
+    data_period: "1d"
+    position_size: 100
+    max_positions: 1
+  - symbol: "MSFT"
+    timeframe: "5m"
+    data_period: "1d"
+    position_size: 100
+    max_positions: 1
+  - symbol: "GOOGL"
+    timeframe: "15m"
+    data_period: "1d"
+    position_size: 100
+    max_positions: 1
+
+indicators:
+  fast_ema_length: 9
+  slow_ema_length: 21
+  rsi_length: 14
+  macd_fast: 12
+  macd_slow: 26
+  macd_signal: 9
+  adx_length: 14
+  adx_threshold: 25
+  volume_ma_length: 20
+
+risk_management:
+  take_profit_perc: 0.02
+  stop_loss_perc: 0.01
+  position_size_perc: 0.02
+  max_daily_loss: -0.03
+  max_trades_per_day: 10
+  required_risk_reward: 1.5
+  correlation_threshold: 0.7
+
+broker:
+  name: "alpaca"
+  api_key: "YOUR_ALPACA_API_KEY"
+  api_secret: "YOUR_ALPACA_API_SECRET"
+  paper: true
+  base_url: "https://paper-api.alpaca.markets"
+  data_url: "https://data.alpaca.markets"
+  websocket_url: "wss://stream.data.alpaca.markets"
+
+notifications:
+  enabled: true
+  service: "twilio"
+  credentials:
+    account_sid: "YOUR_TWILIO_ACCOUNT_SID"
+    auth_token: "YOUR_TWILIO_AUTH_TOKEN"
+    from_number: "YOUR_TWILIO_FROM_NUMBER"
+    to_number: "YOUR_TWILIO_TO_NUMBER"
+  alerts:
+    trade_entry: true
+    trade_exit: true
+    error: true
+    daily_summary: true
+    risk_breach: true
+
+backtest:
+  enabled: true
+  start_date: "2023-01-01"
+  end_date: "2023-12-31"
+  initial_capital: 100000
+  commission_rate: 0.001
+  slippage: 0.001
+  enable_optimization: true
+  optimization_params:
+    - name: "fast_ema_length"
+      range: [5, 15]
+      step: 2
+    - name: "slow_ema_length"
+      range: [15, 30]
+      step: 2
+    - name: "rsi_length"
+      range: [10, 20]
+      step: 2
+
+logging:
+  level: "INFO"
+  file: "trading_bot.log"
+  format: "%(asctime)s - %(levelname)s - %(message)s"
+  rotate: true
+  max_size: 10485760  # 10MB
+  backup_count: 5
+
+# New configurations for real-time data processing and AI-driven signals
+real_time_data:
+  enabled: true
+  data_source: "alpaca"
+  update_frequency: "1m"  # Update every minute
+
+ai_signals:
+  enabled: true
+  strategy: "predictive"  # Use AI for predictive trading signals
